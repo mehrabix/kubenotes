@@ -20,15 +20,29 @@ const posts = (await getCollection('blog'))
 		<Header />
 		<main class="home">
 			<section class="intro">
-				<p class="eyebrow"><span></span> CLOUD NATIVE FIELD NOTES</p>
-				<h1>Less noise.<br /><span>More signal.</span></h1>
-				<p class="lede">
-					A practical notebook for Kubernetes, cloud native tools, and the lessons learned running
-					systems in production.
-				</p>
-				<a class="button" href={`${SITE_BASE}blog/`}>Browse the notes <span aria-hidden="true">→</span></a>
+				<div class="intro-copy">
+					<p class="eyebrow"><span></span> CLOUD NATIVE FIELD NOTES</p>
+					<h1>Less noise.<br /><span>More signal.</span></h1>
+					<p class="lede">
+						A practical notebook for Kubernetes, cloud native tools, and the lessons learned running
+						systems in production.
+					</p>
+					<a class="button" href={`${SITE_BASE}blog/`}>
+						Browse the notes <span aria-hidden="true">→</span>
+					</a>
+				</div>
 				<div class="terminal" aria-label="Example Kubernetes command">
-					<span class="prompt">$</span> kubectl get pods --all-namespaces
+					<div class="terminal-bar">
+						<span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+						<span>quick-start.sh</span>
+					</div>
+					<div class="terminal-code">
+						<p><span class="prompt">$</span> kubectl get pods -A</p>
+						<p><span class="comment"># check the cluster at a glance</span></p>
+						<p><span class="prompt">$</span> kubectl get nodes</p>
+						<p><span class="comment"># inspect workload details</span></p>
+						<p><span class="prompt">$</span> kubectl describe deploy api</p>
+					</div>
 				</div>
 			</section>
 
@@ -68,12 +82,16 @@ const posts = (await getCollection('blog'))
 <style>
 	.home {
 		width: min(100% - 2.5rem, 68rem);
-		padding-top: clamp(4rem, 10vw, 8rem);
-		padding-bottom: 5rem;
+		padding-top: clamp(3.5rem, 7vw, 6rem);
+		padding-bottom: clamp(3rem, 7vw, 5rem);
 	}
 	.intro {
-		position: relative;
-		padding-bottom: clamp(4rem, 9vw, 7rem);
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+		align-items: center;
+		gap: clamp(2rem, 6vw, 5rem);
+		min-height: 27rem;
+		padding-bottom: clamp(3.5rem, 8vw, 6rem);
 	}
 	.eyebrow {
 		display: flex;
@@ -94,49 +112,85 @@ const posts = (await getCollection('blog'))
 	}
 	h1 {
 		margin: 0;
-		font-size: clamp(3.6rem, 10vw, 7.5rem);
+		font-size: clamp(3.5rem, 7.5vw, 6.7rem);
 		letter-spacing: -0.075em;
-		line-height: 0.93;
+		line-height: 0.98;
 	}
 	h1 span {
 		color: var(--accent);
 	}
 	.lede {
 		max-width: 36rem;
-		margin: 1.7rem 0 1.4rem;
+		margin: 1.4rem 0 1.6rem;
 		color: var(--muted);
-		font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+		font-size: clamp(1rem, 1.5vw, 1.15rem);
 	}
 	.button {
 		display: inline-flex;
 		align-items: center;
 		gap: 1rem;
-		padding: 0.8rem 1rem;
-		border-radius: 0.35rem;
+		padding: 0.8rem 1.05rem;
+		border: 1px solid var(--accent);
+		border-radius: 0.4rem;
 		background: var(--accent);
-		color: var(--ink);
+		color: var(--button-text);
 		font-weight: 700;
 		text-decoration: none;
 	}
 	.button:hover {
 		background: var(--accent-bright);
-		color: var(--ink);
+		color: var(--button-text);
 	}
 	.terminal {
-		position: absolute;
-		right: 0;
-		bottom: 7rem;
-		padding: 1.2rem 1.4rem;
+		overflow: hidden;
 		border: 1px solid var(--line);
-		border-radius: 0.45rem;
+		border-radius: 0.65rem;
 		background: var(--panel);
 		color: var(--muted);
 		font-family: var(--font-mono);
-		font-size: 0.82rem;
+		font-size: 0.78rem;
+		box-shadow: 0 1rem 2.5rem rgb(31 41 55 / 8%);
+	}
+	.terminal-bar {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.85rem 1rem;
+		border-bottom: 1px solid var(--line);
+		color: var(--muted);
+		font-size: 0.7rem;
+	}
+	.terminal-dots {
+		display: flex;
+		gap: 0.3rem;
+	}
+	.terminal-dots i {
+		width: 0.45rem;
+		height: 0.45rem;
+		border-radius: 50%;
+		background: var(--line);
+	}
+	.terminal-code {
+		overflow-x: auto;
+		padding: 1.1rem 1.2rem;
+	}
+	.terminal-code p {
+		margin: 0;
+		white-space: nowrap;
+	}
+	.terminal-code p + p {
+		margin-top: 0.45rem;
+	}
+	.terminal-code p:nth-child(2),
+	.terminal-code p:nth-child(4) {
+		margin-bottom: 0.8rem;
 	}
 	.prompt {
-		margin-right: 0.55rem;
+		margin-right: 0.4rem;
 		color: var(--accent);
+	}
+	.comment {
+		color: var(--comment);
 	}
 	.recent {
 		padding-top: 2rem;
@@ -197,8 +251,9 @@ const posts = (await getCollection('blog'))
 	}
 	.empty {
 		padding: 1.25rem;
-		border: 1px dashed var(--line);
+		border: 1px solid var(--line);
 		border-radius: 0.4rem;
+		background: var(--panel);
 		color: var(--muted);
 		font-size: 0.95rem;
 	}
@@ -207,10 +262,16 @@ const posts = (await getCollection('blog'))
 	}
 	@media (max-width: 760px) {
 		.home {
-			width: min(100% - 1.5rem, 68rem);
+			width: min(100% - 2.5rem, 68rem);
+		}
+		.intro {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 2rem;
+			min-height: auto;
+			padding-bottom: 3.5rem;
 		}
 		.terminal {
-			display: none;
+			width: min(100%, 32rem);
 		}
 		.post-list a {
 			display: block;
@@ -218,6 +279,22 @@ const posts = (await getCollection('blog'))
 		.post-list time {
 			display: inline-block;
 			margin-top: 0.6rem;
+		}
+	}
+	@media (max-width: 600px) {
+		.home {
+			width: min(100% - 1.5rem, 68rem);
+			padding-top: 3rem;
+		}
+		h1 {
+			font-size: clamp(3.1rem, 12vw, 4.5rem);
+		}
+		.intro {
+			gap: 1.75rem;
+			padding-bottom: 2.75rem;
+		}
+		.section-heading {
+			align-items: center;
 		}
 	}
 </style>

@@ -1,13 +1,28 @@
 :root {
-	color-scheme: dark;
-	--ink: #e7eee8;
-	--muted: #91a098;
-	--accent: #a7f36a;
-	--accent-bright: #bcff83;
-	--line: #26342d;
-	--panel: #111a16;
-	--background: #0b100d;
+	color-scheme: light;
+	--ink: #1f2937;
+	--muted: #4b5563;
+	--accent: #245a80;
+	--accent-bright: #1c4969;
+	--line: #d8dee8;
+	--panel: #ffffff;
+	--background: #f8fafc;
+	--button-text: #ffffff;
+	--comment: #626d7a;
 	--font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+}
+
+:root[data-theme='dark'] {
+	color-scheme: dark;
+	--ink: #e9edf2;
+	--muted: #b2bcc8;
+	--accent: #93b7d5;
+	--accent-bright: #acc9e1;
+	--line: #303943;
+	--panel: #181e24;
+	--background: #101418;
+	--button-text: #101820;
+	--comment: #a0aab6;
 }
 
 * {
@@ -27,8 +42,17 @@ body {
 	line-height: 1.65;
 }
 
+main {
+	margin-inline: auto;
+}
+
 a {
 	transition: color 140ms ease, background-color 140ms ease;
+}
+
+a:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 4px;
 }
 
 .sr-only {

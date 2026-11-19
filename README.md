@@ -33,6 +33,8 @@ The `title`, `description`, and `pubDate` fields are required. `updatedDate` is 
 | `npm run build` | Build the static site into `dist/` |
 | `npm run preview` | Preview the production build locally |
 
+The site opens in light mode. Use the sun/moon button in the header to switch themes; your choice is saved in this browser.
+
 ## Deploy to GitHub Pages
 
 The site is configured for the project URL `https://mehrabix.github.io/kubenotes/`. Pushing to `master` runs the GitHub Actions workflow in `.github/workflows/deploy.yml` and publishes the static build. GitHub Pages must use **GitHub Actions** as its deployment source.

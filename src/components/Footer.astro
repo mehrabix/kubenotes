@@ -3,17 +3,39 @@ const today = new Date().getFullYear();
 ---
 
 <footer>
-	<p>&copy; {today} kubenotes <span aria-hidden="true">·</span> Written in Markdown.</p>
+	<div class="footer-inner">
+		<p>&copy; {today} kubenotes</p>
+		<p class="footer-note">A small notebook for cloud native things.</p>
+	</div>
 </footer>
 <style>
 	footer {
-		padding: 2rem 1.25rem;
+		padding: 1.35rem 0;
 		border-top: 1px solid var(--line);
 		color: var(--muted);
-		text-align: center;
+	}
+	.footer-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		width: min(100% - 2.5rem, 68rem);
+		margin-inline: auto;
 	}
 	p {
 		margin: 0;
 		font-size: 0.85rem;
+	}
+	.footer-note {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+	}
+	@media (max-width: 600px) {
+		.footer-inner {
+			width: min(100% - 1.5rem, 68rem);
+		}
+		.footer-note {
+			text-align: right;
+		}
 	}
 </style>
