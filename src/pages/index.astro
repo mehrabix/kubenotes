@@ -4,7 +4,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { SITE_BASE, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 const posts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -26,7 +26,7 @@ const posts = (await getCollection('blog'))
 					A practical notebook for Kubernetes, cloud native tools, and the lessons learned running
 					systems in production.
 				</p>
-				<a class="button" href="/blog/">Browse the notes <span aria-hidden="true">→</span></a>
+				<a class="button" href={`${SITE_BASE}blog/`}>Browse the notes <span aria-hidden="true">→</span></a>
 				<div class="terminal" aria-label="Example Kubernetes command">
 					<span class="prompt">$</span> kubectl get pods --all-namespaces
 				</div>
@@ -38,13 +38,13 @@ const posts = (await getCollection('blog'))
 						<p class="eyebrow">THE NOTEBOOK</p>
 						<h2 id="recent-heading">Recent notes</h2>
 					</div>
-					<a href="/blog/">All notes <span aria-hidden="true">→</span></a>
+					<a href={`${SITE_BASE}blog/`}>All notes <span aria-hidden="true">→</span></a>
 				</div>
 				{posts.length > 0 ? (
 					<ul class="post-list">
 						{posts.map((post) => (
 							<li>
-								<a href={`/blog/${post.id}/`}>
+								<a href={`${SITE_BASE}blog/${post.id}/`}>
 									<div>
 										<h3>{post.data.title}</h3>
 										<p>{post.data.description}</p>

@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { SITE_BASE, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
 <!doctype html>
@@ -24,7 +24,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				Want to add a note? Create a <code>.md</code> file in <code>src/content/blog/</code> with a
 				title, description, and publication date in its frontmatter.
 			</p>
-			<a href="/blog/">Browse the notes <span aria-hidden="true">→</span></a>
+			<a href={`${SITE_BASE}blog/`}>Browse the notes <span aria-hidden="true">→</span></a>
 		</main>
 		<Footer />
 	</body>

@@ -4,6 +4,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import { SITE_BASE } from '../consts';
 
 type Props = CollectionEntry<'blog'>['data'];
 const { title, description, pubDate, updatedDate } = Astro.props;
@@ -19,7 +20,7 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 		<main class="article-page">
 			<article>
 				<header class="article-heading">
-					<a class="back-link" href="/blog/">← All notes</a>
+					<a class="back-link" href={`${SITE_BASE}blog/`}>← All notes</a>
 					<p class="date">
 						<FormattedDate date={pubDate} />
 						{updatedDate && <> <span aria-hidden="true">·</span> Updated <FormattedDate date={updatedDate} /></>}

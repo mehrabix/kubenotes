@@ -1,15 +1,15 @@
 ---
-import { SITE_TITLE } from '../consts';
+import { SITE_BASE, SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
 ---
 
 <header>
 	<nav>
-		<a class="brand" href="/"><span class="brand-mark">k</span>{SITE_TITLE}</a>
+		<a class="brand" href={SITE_BASE}><span class="brand-mark">k</span>{SITE_TITLE}</a>
 		<div class="nav-links">
-			<HeaderLink href="/blog/">Notes</HeaderLink>
-			<HeaderLink href="/about/">About</HeaderLink>
-			<a class="rss-link" href="/rss.xml">RSS <span aria-hidden="true">↗</span></a>
+			<HeaderLink href={`${SITE_BASE}blog/`}>Notes</HeaderLink>
+			<HeaderLink href={`${SITE_BASE}about/`}>About</HeaderLink>
+			<a class="rss-link" href={`${SITE_BASE}rss.xml`}>RSS <span aria-hidden="true">↗</span></a>
 		</div>
 	</nav>
 </header>

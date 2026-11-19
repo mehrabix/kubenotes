@@ -23,7 +23,7 @@ pubDate: "2026-11-19"
 Write the article here using standard Markdown.
 ```
 
-The `title`, `description`, and `pubDate` fields are required. `updatedDate` is optional. Markdown headings, links, lists, quotes, and fenced code blocks are supported. Images can be stored in `public/` and referenced by their site path, such as `![Diagram](/images/diagram.png)`.
+The `title`, `description`, and `pubDate` fields are required. `updatedDate` is optional. Markdown headings, links, lists, quotes, and fenced code blocks are supported. Images can be stored in `public/` and referenced by their site path, such as `![Diagram](/kubenotes/images/diagram.png)`.
 
 ## Commands
 
@@ -33,7 +33,11 @@ The `title`, `description`, and `pubDate` fields are required. `updatedDate` is 
 | `npm run build` | Build the static site into `dist/` |
 | `npm run preview` | Preview the production build locally |
 
-Set `SITE_URL` to the canonical deployment URL when building for production. The default is `https://kubenotes.dev`.
+## Deploy to GitHub Pages
+
+The site is configured for the project URL `https://mehrabix.github.io/kubenotes/`. Pushing to `master` runs the GitHub Actions workflow in `.github/workflows/deploy.yml` and publishes the static build. GitHub Pages must use **GitHub Actions** as its deployment source.
+
+If you move the site to a custom domain or another host, update `site` and `base` in `astro.config.mjs` to match that URL.
 
 ## Project structure
 

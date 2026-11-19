@@ -4,3 +4,6 @@
 export const SITE_TITLE = 'kubenotes';
 export const SITE_DESCRIPTION =
 	'Practical notes on Kubernetes, cloud native tools, and the systems around them.';
+export const SITE_BASE = import.meta.env.BASE_URL.endsWith('/')
+	? import.meta.env.BASE_URL
+	: `${import.meta.env.BASE_URL}/`;

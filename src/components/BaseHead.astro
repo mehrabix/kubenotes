@@ -2,7 +2,7 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
-import { SITE_TITLE } from '../consts';
+import { SITE_BASE, SITE_TITLE } from '../consts';
 
 interface Props {
 	title: string;
@@ -15,15 +15,20 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="sitemap" href="/sitemap-index.xml" />
-<link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href="/rss.xml" />
+<link rel="icon" type="image/svg+xml" href={`${SITE_BASE}favicon.svg`} />
+<link rel="sitemap" href={`${SITE_BASE}sitemap-index.xml`} />
+<link
+	rel="alternate"
+	type="application/rss+xml"
+	title={SITE_TITLE}
+	href={`${SITE_BASE}rss.xml`}
+/>
 <meta name="generator" content={Astro.generator} />
 <link rel="canonical" href={canonicalURL} />
 <title>{title}</title>
 <meta name="description" content={description} />
 <meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
+<meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta name="twitter:card" content="summary_large_image" />
