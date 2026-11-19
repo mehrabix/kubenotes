@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
@@ -7,74 +6,28 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
-
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate } = Astro.props;
 ---
 
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
 	</head>
 
 	<body>
 		<Header />
-		<main>
+		<main class="article-page">
 			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
+				<header class="article-heading">
+					<a class="back-link" href="/blog/">← All notes</a>
+					<p class="date">
+						<FormattedDate date={pubDate} />
+						{updatedDate && <> <span aria-hidden="true">·</span> Updated <FormattedDate date={updatedDate} /></>}
+					</p>
+					<h1>{title}</h1>
+					<p class="description">{description}</p>
+				</header>
 				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{updatedDate && (
-								<div class="last-updated-on">
-									Last updated on <FormattedDate date={updatedDate} />
-								</div>
-							)}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
 					<slot />
 				</div>
 			</article>
@@ -82,3 +35,104 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<Footer />
 	</body>
 </html>
+<style>
+	.article-page {
+		width: min(100% - 2.5rem, 48rem);
+		padding-top: clamp(3rem, 8vw, 6rem);
+		padding-bottom: 6rem;
+	}
+	.article-heading {
+		padding-bottom: 2rem;
+		border-bottom: 1px solid var(--line);
+	}
+	.back-link {
+		color: var(--accent);
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		text-decoration: none;
+	}
+	.date {
+		margin: 2.5rem 0 0.7rem;
+		color: var(--muted);
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+	}
+	h1 {
+		margin: 0;
+		font-size: clamp(2.5rem, 7vw, 4rem);
+		letter-spacing: -0.06em;
+		line-height: 1.05;
+	}
+	.description {
+		margin: 1rem 0 0;
+		color: var(--muted);
+		font-size: 1.15rem;
+	}
+	.prose {
+		padding-top: 1.5rem;
+		color: var(--muted);
+		font-size: 1.05rem;
+		line-height: 1.8;
+	}
+	.prose :global(h2),
+	.prose :global(h3),
+	.prose :global(h4) {
+		margin: 2.5rem 0 0.8rem;
+		color: var(--ink);
+		letter-spacing: -0.035em;
+		line-height: 1.2;
+	}
+	.prose :global(h2) {
+		font-size: 1.75rem;
+	}
+	.prose :global(h3) {
+		font-size: 1.35rem;
+	}
+	.prose :global(p),
+	.prose :global(ul),
+	.prose :global(ol) {
+		margin: 0 0 1.25rem;
+	}
+	.prose :global(a) {
+		color: var(--accent);
+	}
+	.prose :global(code) {
+		padding: 0.15rem 0.35rem;
+		border-radius: 0.2rem;
+		background: var(--panel);
+		color: var(--accent);
+		font-family: var(--font-mono);
+		font-size: 0.88em;
+	}
+	.prose :global(pre) {
+		overflow-x: auto;
+		padding: 1rem 1.2rem;
+		border: 1px solid var(--line);
+		border-radius: 0.4rem;
+		background: var(--panel);
+		color: var(--ink);
+		font-size: 0.85rem;
+		line-height: 1.6;
+	}
+	.prose :global(pre code) {
+		padding: 0;
+		background: none;
+		color: inherit;
+	}
+	.prose :global(blockquote) {
+		margin: 1.5rem 0;
+		padding-left: 1rem;
+		border-left: 2px solid var(--accent);
+		color: var(--muted);
+	}
+	.prose :global(hr) {
+		margin: 2rem 0;
+		border: 0;
+		border-top: 1px solid var(--line);
+	}
+	@media (max-width: 600px) {
+		.article-page {
+			width: min(100% - 1.5rem, 48rem);
+		}
+	}
+</style>
