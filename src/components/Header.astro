@@ -5,11 +5,20 @@ import HeaderLink from './HeaderLink.astro';
 
 <header>
 	<nav>
-		<a class="brand" href={SITE_BASE}><span class="brand-mark">k</span>{SITE_TITLE}</a>
+		<a class="brand" href={SITE_BASE} aria-label={`${SITE_TITLE} home`}>
+			<img class="brand-mark" src={`${SITE_BASE}favicon.svg`} alt="" aria-hidden="true" />
+			<span>{SITE_TITLE}</span>
+		</a>
 		<div class="nav-links">
 			<HeaderLink href={`${SITE_BASE}blog/`}>Notes</HeaderLink>
 			<HeaderLink href={`${SITE_BASE}about/`}>About</HeaderLink>
-			<a class="rss-link" href={`${SITE_BASE}rss.xml`}>RSS <span aria-hidden="true">↗</span></a>
+			<a class="rss-link" href={`${SITE_BASE}rss.xml`}>
+				<svg viewBox="0 0 20 20" aria-hidden="true">
+					<circle cx="5" cy="15" r="1.25" />
+					<path d="M4.5 9.5a6 6 0 0 1 6 6M4.5 5a10.5 10.5 0 0 1 10.5 10.5" />
+				</svg>
+				<span>RSS</span>
+			</a>
 			<button
 				class="theme-toggle"
 				type="button"
@@ -55,7 +64,7 @@ import HeaderLink from './HeaderLink.astro';
 		border-bottom: 1px solid var(--line);
 	}
 	nav {
-		width: min(100% - 2.5rem, 68rem);
+		width: min(100% - 2.5rem, 74rem);
 		min-height: 4.5rem;
 		margin: 0 auto;
 		display: flex;
@@ -66,53 +75,72 @@ import HeaderLink from './HeaderLink.astro';
 	.brand {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.55rem;
+		gap: 0.7rem;
 		color: var(--ink);
-		font-family: var(--font-mono);
-		font-size: 1.15rem;
-		font-weight: 750;
+		font-size: 1.08rem;
+		font-weight: 760;
+		letter-spacing: -0.035em;
 		text-decoration: none;
 	}
 	.brand-mark {
-		display: grid;
-		width: 1.8rem;
-		aspect-ratio: 1;
-		place-items: center;
-		border-radius: 0.4rem;
-		background: var(--accent);
-		color: var(--button-text);
+		display: block;
+		width: 2.35rem;
+		height: 2.35rem;
+		border-radius: 0.72rem;
+		box-shadow: 0 5px 14px rgb(40 87 164 / 18%);
 	}
 	.nav-links {
 		display: flex;
 		align-items: center;
-		gap: clamp(0.8rem, 3vw, 2rem);
+		gap: 0.35rem;
 	}
 	.nav-links a {
+		display: inline-flex;
+		min-height: 2.5rem;
+		align-items: center;
+		gap: 0.35rem;
+		padding: 0.45rem 0.8rem;
+		border-radius: 0.55rem;
 		color: var(--muted);
+		font-size: 0.92rem;
 		text-decoration: none;
 	}
 	.nav-links a:hover,
 	.nav-links a.active {
 		color: var(--ink);
+		background: var(--soft);
+	}
+	.nav-links a.active {
+		font-weight: 650;
 	}
 	.rss-link {
-		font-family: var(--font-mono);
-		font-size: 0.85rem;
+		margin-left: 0.2rem;
+	}
+	.rss-link svg {
+		width: 1rem;
+		height: 1rem;
+		fill: none;
+		stroke: currentColor;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke-width: 1.6;
 	}
 	.theme-toggle {
 		display: grid;
-		width: 2.25rem;
-		height: 2.25rem;
-		padding: 0.45rem;
+		width: 2.5rem;
+		height: 2.5rem;
+		margin-left: 0.25rem;
+		padding: 0.55rem;
 		place-items: center;
 		border: 1px solid var(--line);
-		border-radius: 0.4rem;
+		border-radius: 0.65rem;
 		background: var(--panel);
 		color: var(--ink);
 		cursor: pointer;
 	}
 	.theme-toggle:hover {
-		background: var(--line);
+		border-color: var(--accent);
+		background: var(--soft);
 	}
 	.theme-toggle svg {
 		width: 1.1rem;
@@ -132,41 +160,49 @@ import HeaderLink from './HeaderLink.astro';
 	}
 	@media (max-width: 600px) {
 		nav {
-			width: min(100% - 1.5rem, 68rem);
-		}
-		nav {
+			width: min(100% - 1.5rem, 74rem);
 			gap: 0.5rem;
 		}
 		.brand {
-			gap: 0.4rem;
-			font-size: 1rem;
+			gap: 0.5rem;
+			font-size: 0.98rem;
 		}
 		.brand-mark {
-			width: 1.6rem;
-		}
-		.nav-links {
-			gap: 0.4rem;
-			font-size: 0.9rem;
-		}
-		.nav-links a {
-			white-space: nowrap;
-		}
-		.theme-toggle {
 			width: 2rem;
 			height: 2rem;
-			padding: 0.35rem;
+		}
+		.nav-links {
+			gap: 0.1rem;
+		}
+		.nav-links a {
+			min-height: 2.2rem;
+			padding-inline: 0.5rem;
+			font-size: 0.83rem;
+			white-space: nowrap;
+		}
+		.rss-link svg {
+			display: none;
+		}
+		.theme-toggle {
+			width: 2.2rem;
+			height: 2.2rem;
+			margin-left: 0.15rem;
+			padding: 0.45rem;
 		}
 	}
 	@media (max-width: 360px) {
 		nav {
 			flex-wrap: wrap;
 			justify-content: flex-start;
-			gap: 0.2rem 0.5rem;
-			padding-block: 0.45rem;
+			gap: 0.15rem 0.5rem;
+			padding-block: 0.55rem;
 		}
 		.nav-links {
 			width: 100%;
 			justify-content: space-between;
+		}
+		.nav-links a {
+			padding-inline: 0.7rem;
 		}
 	}
 </style>

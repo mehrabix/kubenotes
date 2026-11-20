@@ -1,28 +1,30 @@
 :root {
 	color-scheme: light;
-	--ink: #1f2937;
-	--muted: #4b5563;
-	--accent: #245a80;
-	--accent-bright: #1c4969;
-	--line: #d8dee8;
+	--ink: #182435;
+	--muted: #526174;
+	--accent: #2857a4;
+	--accent-bright: #1e478e;
+	--line: #e1e7ef;
 	--panel: #ffffff;
-	--background: #f8fafc;
+	--background: #f6f8fb;
+	--soft: #edf2f9;
 	--button-text: #ffffff;
-	--comment: #626d7a;
+	--comment: #64748b;
 	--font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
 }
 
 :root[data-theme='dark'] {
 	color-scheme: dark;
-	--ink: #e9edf2;
-	--muted: #b2bcc8;
-	--accent: #93b7d5;
-	--accent-bright: #acc9e1;
-	--line: #303943;
-	--panel: #181e24;
-	--background: #101418;
-	--button-text: #101820;
-	--comment: #a0aab6;
+	--ink: #edf1f7;
+	--muted: #b0bdce;
+	--accent: #a9c5ff;
+	--accent-bright: #c2d4ff;
+	--line: #303c4d;
+	--panel: #1a2330;
+	--background: #111823;
+	--soft: #202c3d;
+	--button-text: #142037;
+	--comment: #b0bdce;
 }
 
 * {
@@ -31,6 +33,7 @@
 
 html {
 	background: var(--background);
+	scroll-behavior: smooth;
 }
 
 body {
@@ -40,6 +43,7 @@ body {
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 	font-size: 16px;
 	line-height: 1.65;
+	-webkit-font-smoothing: antialiased;
 }
 
 main {
@@ -47,7 +51,12 @@ main {
 }
 
 a {
-	transition: color 140ms ease, background-color 140ms ease;
+	transition:
+		color 160ms ease,
+		background-color 160ms ease,
+		border-color 160ms ease,
+		box-shadow 160ms ease,
+		transform 160ms ease;
 }
 
 a:focus-visible {
@@ -66,4 +75,20 @@ a:focus-visible {
 	clip: rect(1px, 1px, 1px, 1px);
 	clip-path: inset(50%);
 	white-space: nowrap;
+}
+
+::selection {
+	background: var(--accent);
+	color: var(--button-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
 }
