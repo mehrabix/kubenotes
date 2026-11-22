@@ -10,6 +10,13 @@
 	--soft: #edf2f9;
 	--button-text: #ffffff;
 	--comment: #64748b;
+	--code-inline: #edf2f7;
+	--code-inline-text: #21558e;
+	--code-line: #d7e0eb;
+	--code-background: #fafbfc;
+	--code-border: #d7dde5;
+	--code-text: #24292f;
+	--code-scrollbar: #bbc5d1;
 	--font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
 }
 
@@ -25,6 +32,13 @@
 	--soft: #202c3d;
 	--button-text: #142037;
 	--comment: #b0bdce;
+	--code-inline: #263244;
+	--code-inline-text: #b9d0f2;
+	--code-line: #364459;
+	--code-background: #181e27;
+	--code-border: #303b4c;
+	--code-text: #d8e1ed;
+	--code-scrollbar: #4a5668;
 }
 
 * {

@@ -7,4 +7,12 @@ export default defineConfig({
 	site: 'https://mehrabix.github.io',
 	base: '/kubenotes',
 	integrations: [sitemap()],
+	markdown: {
+		shikiConfig: {
+			themes: {
+				light: 'github-light',
+				dark: 'github-dark',
+			},
+		},
+	},
 });

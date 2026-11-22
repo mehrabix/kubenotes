@@ -108,30 +108,84 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 	}
 	.prose :global(a) {
 		color: var(--accent);
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.18em;
 	}
 	.prose :global(code) {
-		padding: 0.16rem 0.38rem;
-		border: 1px solid var(--line);
-		border-radius: 0.35rem;
-		background: var(--soft);
-		color: var(--accent);
+		padding: 0.14rem 0.38rem;
+		border: 1px solid var(--code-line);
+		border-radius: 0.32rem;
+		background: var(--code-inline);
+		color: var(--code-inline-text);
 		font-family: var(--font-mono);
 		font-size: 0.88em;
+		text-decoration: none;
 	}
 	.prose :global(pre) {
+		position: relative;
 		overflow-x: auto;
-		padding: 1rem 1.2rem;
-		border: 1px solid var(--line);
-		border-radius: 0.75rem;
-		background: var(--panel);
-		color: var(--ink);
+		margin: 1.5rem 0;
+		padding: 3.25rem 1.25rem 1.15rem;
+		border: 1px solid var(--code-border);
+		border-radius: 0.55rem;
+		background: var(--code-background) !important;
+		color: var(--code-text) !important;
 		font-size: 0.85rem;
 		line-height: 1.6;
+		box-shadow: 0 0.75rem 1.8rem rgb(12 18 28 / 8%);
+		tab-size: 2;
+	}
+	.prose :global(pre)::before {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		height: 2.35rem;
+		border-bottom: 1px solid var(--code-border);
+		background:
+			radial-gradient(circle at 0.75rem 50%, #ef6a67 0 0.28rem, transparent 0.31rem),
+			radial-gradient(circle at 1.35rem 50%, #e7b94f 0 0.28rem, transparent 0.31rem),
+			radial-gradient(circle at 1.95rem 50%, #69be72 0 0.28rem, transparent 0.31rem),
+			var(--code-inline);
+		content: '';
+	}
+	.prose :global(pre)::after {
+		position: absolute;
+		top: 0.68rem;
+		right: 0.85rem;
+		color: var(--muted);
+		font-family: var(--font-mono);
+		font-size: 0.58rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		content: 'CODE';
 	}
 	.prose :global(pre code) {
 		padding: 0;
+		border: 0;
 		background: none;
 		color: inherit;
+		font-size: inherit;
+		text-decoration: none;
+	}
+	.prose :global(pre code *) {
+		text-decoration: none;
+	}
+	.prose :global(pre),
+	.prose :global(pre code),
+	.prose :global(pre code span) {
+		text-decoration: none;
+	}
+	.prose :global(pre)::-webkit-scrollbar {
+		height: 0.55rem;
+	}
+	.prose :global(pre)::-webkit-scrollbar-track {
+		background: var(--code-background);
+	}
+	.prose :global(pre)::-webkit-scrollbar-thumb {
+		border: 0.15rem solid var(--code-background);
+		border-radius: 99px;
+		background: var(--code-scrollbar);
 	}
 	.prose :global(blockquote) {
 		margin: 1.5rem 0;
