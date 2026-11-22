@@ -20,6 +20,10 @@
 	--font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
 }
 
+:root[data-theme='dark'] .astro-code span {
+	color: var(--shiki-dark, var(--code-text)) !important;
+}
+
 :root[data-theme='dark'] {
 	color-scheme: dark;
 	--ink: #edf1f7;
